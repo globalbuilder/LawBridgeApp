@@ -14,7 +14,7 @@ class ApiConstants {
   static const String profiles = '/api/users/profiles/';
   static const String legalResources = '/api/legalresources/';
   static const String educationalOpportunities = '/api/educationalopportunities/';
-  static const String favoriteResources = '/api/favorites/resources/';
-  static const String favoriteOpportunities = '/api/favorites/opportunities/';
+  static const String favoritesResources = '/api/favorites/resources/';
+  static const String favoritesOpportunities = '/api/favorites/opportunities/';
   static const String notifications = '/api/notifications/';
 }

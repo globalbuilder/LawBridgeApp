@@ -1,9 +1,14 @@
 // lib/presentation/screens/legal_resources/resource_list_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../logic/legal_resource/legal_resource_bloc.dart';
 import '../../../logic/legal_resource/legal_resource_event.dart';
 import '../../../logic/legal_resource/legal_resource_state.dart';
+
+class ResourceDetailArgs {
+  static int? resourceId;
+}
 
 class ResourceListScreen extends StatefulWidget {
   const ResourceListScreen({Key? key}) : super(key: key);
@@ -21,7 +26,9 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
   }
 
   void _navigateToDetail(BuildContext context, int resourceId) {
-    Navigator.pushNamed(context, '/legalresource/detail', arguments: resourceId);
+    // Instead of passing as route argument, store in ResourceDetailArgs
+    ResourceDetailArgs.resourceId = resourceId;
+    Navigator.pushNamed(context, '/legalresource/detail');
   }
 
   @override
@@ -45,9 +52,9 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
                 final imageUrl = item['image'] as String?;
 
                 return ListTile(
-                  leading: imageUrl != null 
-                    ? Image.network(imageUrl, width: 50, height: 50, fit: BoxFit.cover)
-                    : const Icon(Icons.image_not_supported),
+                  leading: imageUrl != null
+                      ? Image.network(imageUrl, width: 50, height: 50, fit: BoxFit.cover)
+                      : const Icon(Icons.image_not_supported),
                   title: Text(title),
                   onTap: () => _navigateToDetail(context, resourceId),
                 );

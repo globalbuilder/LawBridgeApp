@@ -11,8 +11,7 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   void _navigateToEdit(BuildContext context, Map<String, dynamic> profileData) {
-    
-    Navigator.pushNamed(context, '/profile/edit', arguments: profileData);
+    Navigator.pushNamed(context, '/profile/edit');
   }
 
   @override
@@ -66,6 +65,7 @@ class ProfileScreen extends StatelessWidget {
                   else
                     const Center(child: Text('No profile image')),
                   const SizedBox(height: 24),
+                  Text('Profile ID: ${state.id}'),
                   Text('First Name: ${state.firstName}'),
                   Text('Last Name: ${state.lastName}'),
                   Text('Phone: ${state.phone}'),

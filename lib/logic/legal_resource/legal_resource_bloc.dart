@@ -1,4 +1,5 @@
 // lib/logic/legal_resource/legal_resource_bloc.dart
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'legal_resource_event.dart';
 import 'legal_resource_state.dart';
@@ -6,6 +7,7 @@ import '../../data/repositories/legal_resource_repository.dart';
 
 class LegalResourceBloc extends Bloc<LegalResourceEvent, LegalResourceState> {
   final LegalResourceRepository repository;
+
   LegalResourceBloc({required this.repository}) : super(ResourceInitial()) {
     on<FetchAllResourcesEvent>(_onFetchAll);
     on<FetchResourceDetailEvent>(_onFetchDetail);

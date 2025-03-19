@@ -1,8 +1,10 @@
 // lib/logic/legal_resource/legal_resource_event.dart
+
 import 'package:equatable/equatable.dart';
 
 abstract class LegalResourceEvent extends Equatable {
   const LegalResourceEvent();
+
   @override
   List<Object?> get props => [];
 }

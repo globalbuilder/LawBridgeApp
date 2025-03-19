@@ -1,4 +1,5 @@
 // lib/logic/profile/profile_state.dart
+
 import 'package:equatable/equatable.dart';
 
 abstract class ProfileState extends Equatable {
@@ -19,6 +20,8 @@ class ProfileFetched extends ProfileState {
   final String address;
   final String bio;
   final String? imageUrl;
+  final String? email; // add email
+
   const ProfileFetched({
     required this.id,
     required this.firstName,
@@ -27,14 +30,17 @@ class ProfileFetched extends ProfileState {
     required this.address,
     required this.bio,
     this.imageUrl,
+    this.email,
   });
+
   @override
-  List<Object?> get props => [id, firstName, lastName, phone, address, bio, imageUrl ?? ''];
+  List<Object?> get props => [id, firstName, lastName, phone, address, bio, imageUrl, email];
 }
 
 class ProfileUpdated extends ProfileState {
   final String message;
   const ProfileUpdated({required this.message});
+
   @override
   List<Object?> get props => [message];
 }
@@ -42,6 +48,7 @@ class ProfileUpdated extends ProfileState {
 class ProfileError extends ProfileState {
   final String error;
   const ProfileError({required this.error});
+
   @override
   List<Object?> get props => [error];
 }

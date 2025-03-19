@@ -1,4 +1,5 @@
 // lib/logic/profile/profile_bloc.dart
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
@@ -12,17 +13,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdateProfileEvent>(_onUpdateProfile);
   }
 
-  Future<void> _onFetchProfile(FetchProfileEvent event, Emitter<ProfileState> emit) async {
+  Future<void> _onFetchProfile(
+      FetchProfileEvent event, Emitter<ProfileState> emit) async {
     emit(ProfileLoading());
     try {
       final data = await profileRepository.fetchProfile(token: event.token);
       final id = data['id'] as int;
-      final firstName = data['first_name'] as String;
-      final lastName = data['last_name'] as String;
+      final firstName = data['first_name'] as String? ?? '';
+      final lastName = data['last_name'] as String? ?? '';
       final phone = data['phone'] as String? ?? '';
       final address = data['address'] as String? ?? '';
       final bio = data['bio'] as String? ?? '';
       final imageUrl = data['image'] as String?;
+      final email = data['email'] as String? ?? '';
 
       emit(ProfileFetched(
         id: id,
@@ -32,13 +35,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         address: address,
         bio: bio,
         imageUrl: imageUrl,
+        email: email, // pass it to ProfileFetched state
       ));
     } catch (error) {
       emit(ProfileError(error: error.toString()));
     }
   }
 
-  Future<void> _onUpdateProfile(UpdateProfileEvent event, Emitter<ProfileState> emit) async {
+  Future<void> _onUpdateProfile(
+      UpdateProfileEvent event, Emitter<ProfileState> emit) async {
     emit(ProfileLoading());
     try {
       final result = await profileRepository.updateProfile(
@@ -46,6 +51,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profileId: event.profileId,
         firstName: event.firstName,
         lastName: event.lastName,
+        email: event.email, // pass email
         phone: event.phone,
         address: event.address,
         bio: event.bio,
