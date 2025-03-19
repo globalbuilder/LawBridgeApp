@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Blocs
 import 'core/theme/theme_bloc.dart';
 import 'logic/auth/auth_bloc.dart';
-import 'logic/auth/auth_state.dart';
 import 'logic/favorites/favorites_bloc.dart';
 import 'logic/profile/profile_bloc.dart';
 import 'logic/legal_resource/legal_resource_bloc.dart';
